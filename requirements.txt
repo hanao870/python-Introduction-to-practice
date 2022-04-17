@@ -7,3 +7,4 @@ isort==5.10.1 # import の並びをチェックするツール
 flake8==4.0.1 # リンター. pycodestyle(pep8 スタイルチェック), pyflakes(論理エラーのチェック), mccabe(複雑度チェック) をまとめたツール
 pylint==2.13.5 # リンター. プションが豊富で多くのチェック項目に対応できるのが特徴
 mypy==0.942 # 静的型チェックツール
+pydocstyle==6.1.1 # PEP 257 で規定されている docstring のリンター
