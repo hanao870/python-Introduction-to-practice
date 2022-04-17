@@ -1,0 +1,6 @@
+# リポジトリ単位の改行コード設定
+# https://kiririmode.hatenablog.jp/entry/20170416/1492300735
+
+* text=auto eol=lf
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf

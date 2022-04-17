@@ -1,0 +1,6 @@
+{
+    // お勧めの拡張機能に表示する拡張機能 ID
+    "recommendations": [
+        "ms-vscode-remote.remote-containers"
+    ]
+}
