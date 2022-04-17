@@ -14,7 +14,19 @@
             }
         },
         "python.defaultInterpreterPath": "/usr/local/bin/python",
-        "python.languageServer": "Default"
+        "python.languageServer": "Default",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": false,
+        "python.linting.flake8Enabled": true,
+        "python.linting.mypyEnabled": true,
+        "python.linting.banditEnabled": true,
+        "python.linting.lintOnSave": true,
+        "python.formatting.provider": "black",
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            // ファイル保存時に isort を実行する設定
+            "source.organizeImports": true
+        }
     },
 
     // Add the IDs of extensions you want installed when the container is created.
@@ -26,10 +38,10 @@
     // リモートコンテナの環境変数
     "remoteEnv": {
         "TZ": "Asia/Tokyo"
-    }
+    },
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    // "postCreateCommand": "pip3 install -r requirements.txt",
+    "postCreateCommand": "pip3 install -r requirements.txt",
 
     // Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     // "remoteUser": "vscode"
