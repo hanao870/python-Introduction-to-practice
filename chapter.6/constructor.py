@@ -9,6 +9,8 @@ T = TypeVar("T", bound="Klass")
 
 
 class Klass:
+    """コンストラクタとイニシャライザの動作確認用."""
+
     def __new__(cls: Type[T], *args: object) -> T:
         """こちらはコンストラクタ."""
         print(f"{cls=}")
