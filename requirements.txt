@@ -1,10 +1,10 @@
 # 必要な python パッケージを記述
-autopep8==1.6.0 # PEP8 に準拠した Python コードフォーマッタ
-black==22.3.0 # PEP8 準拠の Pytho コードフォーマッタ. 設定項目少なめ. 結構人気ある
-yapf==0.32.0 # Google 開発の Python コードフォーマッタ
-bandit==1.7.4 # プログラムの静的セキュリティチェックツール
-isort==5.10.1 # import の並びをチェックするツール
-flake8==4.0.1 # リンター. pycodestyle(pep8 スタイルチェック), pyflakes(論理エラーのチェック), mccabe(複雑度チェック) をまとめたツール
-pylint==2.13.5 # リンター. プションが豊富で多くのチェック項目に対応できるのが特徴
-mypy==0.942 # 静的型チェックツール
-pydocstyle==6.1.1 # PEP 257 で規定されている docstring のリンター
+#autopep8==1.6.0 # PEP8 に準拠した Python コードフォーマッタ
+#black==22.3.0 # PEP8 準拠の Pytho コードフォーマッタ. 設定項目少なめ. 結構人気ある
+#yapf==0.32.0 # Google 開発の Python コードフォーマッタ
+#bandit==1.7.4 # プログラムの静的セキュリティチェックツール
+#isort==5.10.1 # import の並びをチェックするツール
+#flake8==4.0.1 # リンター. pycodestyle(pep8 スタイルチェック), pyflakes(論理エラーのチェック), mccabe(複雑度チェック) をまとめたツール
+#pylint==2.13.5 # リンター. プションが豊富で多くのチェック項目に対応できるのが特徴
+#mypy==0.942 # 静的型チェックツール
+#pydocstyle==6.1.1 # PEP 257 で規定されている docstring のリンター
