@@ -1,7 +1,4 @@
 """クラス動作確認."""
-
-
-from turtle import title
 from typing import Optional
 
 
