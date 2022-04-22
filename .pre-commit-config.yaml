@@ -12,7 +12,7 @@ repos:
       - id: check-toml
       - id: check-yaml
       - id: detect-private-key # 秘密鍵の有無をチェック
-      - id: end-of-file-fixer # ファイルの末尾が改行かチェック
+      # - id: end-of-file-fixer # ファイルの末尾が改行かチェック
       # - id: no-commit-to-branch   # 特定のブランチに直接コミットできないようにする
       #   args: [--branch, master]  # どのブランチにコミットできないようにするかを設定できる. デフォルトは master/main
       # - id: check-json  # コメント付き json ではシンタックスエラーとなる
