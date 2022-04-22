@@ -42,7 +42,8 @@
     "extensions": [
         "ms-python.python",
         "ms-python.vscode-pylance",
-        "DavidAnson.vscode-markdownlint"
+        "DavidAnson.vscode-markdownlint",
+        "donjayamanne.githistory"
     ],
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "pre-commit install"
