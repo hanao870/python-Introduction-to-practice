@@ -50,7 +50,7 @@ class Book:
         self._discounts = value
 
     @property
-    def price(self) -> float:
+    def price(self) -> int:
         """割引価格."""
         print("call price getter.")
         multi = 100 - self._discounts
