@@ -18,6 +18,9 @@ class Book:
             raise ValueError("1以上の値段を設定してください")
 
         self.raw_price = raw_price
+        # クラス用のプライベート変数の場合は先頭にアンダースコア(_)を付ける
+        # Pytho の言語仕様上、プライベート属性は存在しない
+        # _ から始まる変数を使用する場合は自己責任!!
         self._discounts: int = 0
 
     @property
