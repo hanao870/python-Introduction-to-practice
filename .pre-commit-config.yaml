@@ -45,9 +45,8 @@ repos:
     rev: 4.0.1
     hooks:
       - id: flake8
-        # max-line-length setting is the same as black
-        # commit cannot be done when cyclomatic complexity is more than 10.
-        args: [--ignore=E501]
+        # E501 : max-line-length
+        args: [--ignore=E501, "--per-file-ignores=__init__.py:F401"]
   # pydocstyle https://www.pydocstyle.org/en/latest/usage.html#usage-with-the-pre-commit-git-hooks-framework
   # ドキュメント記述を強制する場合は有効だが、結構面倒だよね...
   - repo: https://github.com/pycqa/pydocstyle
