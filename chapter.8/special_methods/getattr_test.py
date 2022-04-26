@@ -6,13 +6,13 @@ from typing import Any
 
 
 class Point:
-    """__dict__ と __getattribute__ の動作確認用クラス."""
+    """`__dict__` と `__getattribute__` の動作確認用クラス."""
 
     pass
 
 
 class Config:
-    """特殊メソッド __getattr__ の動作確認用クラス."""
+    """特殊メソッド `__getattr__` の動作確認用クラス."""
 
     def __init__(self, filename: str) -> None:
         """イニシャライザ.
@@ -31,7 +31,7 @@ class Config:
 
 
 def test_getattribute() -> None:
-    """__getattribute__ の動作確認."""
+    """`__getattribute__` の動作確認."""
     p = Point()
     print(f"p.__dict__ = {p.__dict__}")
 
@@ -51,7 +51,7 @@ def test_getattribute() -> None:
 
 
 def test_getattr() -> None:
-    """__getattr__ の動作確認."""
+    """`__getattr__` の動作確認."""
     config = Config(os.path.join(Path(__file__).parent, "config.json"))
     print(f"config.url = {config.url}")
     print(config.xxx)
