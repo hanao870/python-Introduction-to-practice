@@ -57,7 +57,9 @@ repos:
           # 以下のルールは排他のため、どちらか一方(もしくは両方)を無視する
           # D212 / D213 : モジュールの先頭ドキュメント
           # D203 / D211 : クラスドキュメント
-          - --ignore=D212, D203
+          # - --ignore=D212, D203
+          # ignore と convention は排他のため、どちらか一方しか設定できない
+          - --convention=google
   # コメント付き json のフォーマットチェック
   - repo: https://gitlab.com/bmares/check-json5
     rev: v1.0.0
