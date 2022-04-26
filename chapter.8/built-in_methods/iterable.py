@@ -13,8 +13,7 @@ def zip_test() -> None:
 
 
 def zip_each_lenght() -> None:
-    """
-    組込み関数 zip の動作確認.
+    """組込み関数 zip の動作確認.
 
     zip に与えるオブジェクトの長さが異なる場合は、
     一番短いオブジェクトの長さになる

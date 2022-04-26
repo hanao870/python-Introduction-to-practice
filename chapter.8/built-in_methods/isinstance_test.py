@@ -10,8 +10,7 @@ class MyDict(UserDict[str, int]):
 
 
 def get_value(obj: object, key: str) -> Any:
-    """
-    組み込み関数 isinstance 動作確認.
+    """組み込み関数 isinstance 動作確認.
 
     isinstance で抽象基底クラスを利用すると、
     直接的な継承関係ではなく、
