@@ -44,7 +44,9 @@
         "ms-python.python",
         "ms-python.vscode-pylance",
         "DavidAnson.vscode-markdownlint",
-        "donjayamanne.githistory"
+        "donjayamanne.githistory",
+        "njpwerner.autodocstring",
+        "oderwat.indent-rainbow"
     ],
     // Use 'postCreateCommand' to run commands after the container is created.
     "postCreateCommand": "pre-commit install"
