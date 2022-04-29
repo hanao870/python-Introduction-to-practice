@@ -4,7 +4,7 @@ RUN pip install --no-cache-dir \
     # リンター. pycodestyle(pep8 スタイルチェック), pyflakes(論理エラーのチェック), mccabe(複雑度チェック) をまとめたツール
     flake8==4.0.1 \
     # 静的型チェックツール
-    mypy==0.942 \
+    mypy==0.950 \
     # プログラムの静的セキュリティチェックツール
     bandit==1.7.4 \
     # PEP 257 で規定されている docstring のリンター
