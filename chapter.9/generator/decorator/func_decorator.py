@@ -1,22 +1,24 @@
 """関数デコレータの作成."""
-
-
 # デコレートしたい関数を受け取る
-from typing import Callable, Tuple
+from typing import Callable, ParamSpec, Tuple, TypeVar
+
+P = ParamSpec("P")  # 引数仕様変数を定義
+R = TypeVar("R")  # こちらは通常の型変数
 
 
-def deco1(f: Callable[[], int]) -> Callable[[], int]:
+def deco1(f: Callable[[], R]) -> Callable[[], R]:
     """ログ出力するデコレータ.
 
     Args:
-        f (Callable[[], int]): ログを記録する関数
+        f (Callable[[], R]): ログを記録する関数
+          `R` は関数オブジェクトの戻り値の型
 
     Returns:
-        Callable[[], int]: `f` の戻り値
+        Callable[[], R]: 関数オブジェクト
     """
     print("deco1 called.")
 
-    def wrapper() -> int:
+    def wrapper() -> R:
         print("before exec.")
         v = f()  # 元の関数を実行
         print("after exec.")
@@ -25,19 +27,19 @@ def deco1(f: Callable[[], int]) -> Callable[[], int]:
     return wrapper
 
 
-def deco2(
-    f: Callable[[int, int], Tuple[int, int]]
-) -> Callable[[int, int], Tuple[int, int]]:
+def deco2(f: Callable[P, R]) -> Callable[P, R]:
     """引数を受け取るデコレータ.
 
     Args:
-        f (Callable[[int, int], Tuple[int, int]]): 呼び出し元関数
+        f (Callable[P, R]): デコレータ呼び出し元関数
+      `P` は呼び出し元関数の引数.
+      `R` は呼び出し元関数の戻り値.
 
     Returns:
-        Callable[[int, int], Tuple[int, int]]: 実行元の関数オブジェクト
+        Callable[P, R]: 呼び出し元関数オブジェクト
     """
     # 新しい関数が引数を受け取る
-    def wrapper(*args: int, **kwargs: object) -> Tuple[int, int]:
+    def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
         print("before exec")
         # 引数を渡して関数を実行
         v = f(*args, **kwargs)
@@ -49,25 +51,21 @@ def deco2(
 
 def deco3(
     z: int,
-) -> Callable[
-    [Callable[[int, int], Tuple[int, int]]], Callable[[int, int], Tuple[int, int]]
-]:
-    """...
+) -> Callable[[Callable[P, R]], Callable[P, R]]:
+    """引数を取るデコレータ.
 
     Args:
-        z (int): 任意の整数
+        z (int): 任意の整数.
 
     Returns:
-        Callable[ [Callable[[int, int], Tuple[int, int]]], Callable[[int, int], Tuple[int, int]] ]: そもそもこの定義方法まちがっているのでは？
+        Callable[[Callable[P, R]], Callable[P, R]]: デコレータを返す？
     """
     print("call deco3")
 
-    def _deco3(
-        f: Callable[[int, int], Tuple[int, int]]
-    ) -> Callable[[int, int], Tuple[int, int]]:
+    def _deco3(f: Callable[P, R]) -> Callable[P, R]:
         print("call _deco3")
 
-        def wrapper(*args: int, **kwargs: object) -> Tuple[int, int]:
+        def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
             print(f"before exec {z}")
             v = f(*args, **kwargs)
             print(f"after exec {z}")
