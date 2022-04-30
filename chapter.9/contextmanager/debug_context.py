@@ -34,8 +34,7 @@ def main() -> None:
     logger.debug("before debug log")
 
     # with ブロック内で見たいログの処理を実行する
-    with debug_context() as f:
-        print(f"{f=}")
+    with debug_context():
         logger.info("inside the block info log")
         logger.debug("inside the block debug log")
 
