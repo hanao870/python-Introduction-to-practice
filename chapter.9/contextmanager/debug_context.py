@@ -22,7 +22,7 @@ def debug_context() -> Iterator[None]:
     try:
         # ログレベル変更
         logger.setLevel(logging.DEBUG)
-        yield None
+        yield
     finally:
         # 元のログレベルに戻す
         logger.setLevel(level)
