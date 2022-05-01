@@ -26,6 +26,12 @@ class LazyProperty(Generic[T]):
     def __get__(self, instance: T, owner: Type[T]) -> Union["LazyProperty[T]", R]:
         """...
 
+        Args:
+            instance (T): 呼び出し元クラスのインスタンス.
+              型指定で `Optional[T]` とすればクラスオブジェクトからのアクセスを許可する.
+
+              `Optional[T]` の型指定はほぼ意味ないよね?
+
         Returns:
             _type_: `self.func` の戻り値
         """
@@ -71,3 +77,7 @@ if __name__ == "__main__":
     print(f"{book.price=}")
     # 再度呼ばれた時はキャッシュを使用する
     print(f"{book.price=}")
+
+    # クラスオブジェクトからデスクリプタにアクセスすると None が渡される
+    # 型指定で Optional としていないため、mypy でエラーとなる
+    # print(Book.price)
