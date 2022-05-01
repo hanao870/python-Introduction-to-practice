@@ -1,10 +1,34 @@
 """逐次処理とマルチスレッドの比較."""
 
+import time
 from hashlib import md5
 from pathlib import Path
+from typing import Callable, ParamSpec, TypeVar
 from urllib import request
 
 URL_LIST = ["https://twitter.com", "https://facebook.com", "https://instagram.com"]
+
+P = ParamSpec("P")  # パラメータ仕様変数. パラメータを表す型ヒント
+R = TypeVar("R")  # 戻り値の型を R と定義
+
+
+def elapsed_time(f: Callable[P, R]) -> Callable[P, R]:
+    """処理時間を計測するデコレータ.
+
+    Args:
+        f (Callable[P, R]): 呼び出し元関数オブジェクト
+
+    Returns:
+        Callable[P, R]: 呼び出し元関数オブジェクト
+    """
+
+    def inner(*args: P.args, **kwargs: P.kwargs) -> R:
+        start = time.time()
+        v = f(*args, **kwargs)
+        print(f"{f.__name__}: {time.time() - start} sec")
+        return v
+
+    return inner
 
 
 def download(url: str) -> tuple[str, str]:
@@ -26,6 +50,15 @@ def download(url: str) -> tuple[str, str]:
         return url, str(file_path)
 
 
+@elapsed_time
+def get_sequential() -> None:
+    """`URL_LIST` の URL からページをダウンロードする(逐次処理)."""
+    for url in URL_LIST:
+        print(download(url))
+
+
 if __name__ == "__main__":
     # 動作確認
     print(download(URL_LIST[0]))
+
+    get_sequential()
