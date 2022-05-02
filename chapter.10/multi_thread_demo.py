@@ -1,6 +1,8 @@
 """逐次処理とマルチスレッドの比較."""
 
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 from hashlib import md5
 from pathlib import Path
 from typing import Callable, ParamSpec, TypeVar
@@ -54,7 +56,19 @@ def download(url: str) -> tuple[str, str]:
 def get_sequential() -> None:
     """`URL_LIST` の URL からページをダウンロードする(逐次処理)."""
     for url in URL_LIST:
-        print(download(url))
+        print(f'[{datetime.now().strftime("%Y/%m/%d %H:%M:%S.%f")}] {download(url)}')
+
+
+@elapsed_time
+def get_multi_thread() -> None:
+    """`URL_LIST` の URL からページをダウンロードする(マルチスレッド)."""
+    # max_workers(最大スレッド数) のデフォルトはコア数×5
+    with ThreadPoolExecutor(max_workers=3) as executor:
+        futures = [executor.submit(download, url) for url in URL_LIST]
+
+    for future in as_completed(futures):
+        # 完了したものから取得できる
+        print(f'[{datetime.now().strftime("%Y/%m/%d %H:%M:%S.%f")}] {future.result()}')
 
 
 if __name__ == "__main__":
@@ -62,3 +76,4 @@ if __name__ == "__main__":
     print(download(URL_LIST[0]))
 
     get_sequential()
+    get_multi_thread()
