@@ -1,5 +1,30 @@
 """マルチプロセスでのフィボナッチ数列の計算."""
+import os
 import sys
+import time
+from typing import Callable, ParamSpec, TypeVar
+
+P = ParamSpec("P")  # パラメータ仕様変数. パラメータを表す型ヒント
+R = TypeVar("R")  # 戻り値の型を R と定義
+
+
+def elapsed_time(f: Callable[P, R]) -> Callable[P, R]:
+    """処理時間を計測するデコレータ.
+
+    Args:
+        f (Callable[P, R]): 呼び出し元関数オブジェクト
+
+    Returns:
+        Callable[P, R]: 呼び出し元関数オブジェクト
+    """
+
+    def inner(*args: P.args, **kwargs: P.kwargs) -> R:
+        start = time.time()
+        v = f(*args, **kwargs)
+        print(f"{f.__name__}: {time.time() - start} sec")
+        return v
+
+    return inner
 
 
 def fibonacci(n: int) -> int:
@@ -20,10 +45,29 @@ def fibonacci(n: int) -> int:
         return a
 
 
+@elapsed_time
+def get_sequential(nums: list[int]) -> None:
+    """逐次処理でフィボナッチ数列を計算する.
+
+    Args:
+        nums (list[int]): フィボナッチ数列を計算する値のリスト
+    """
+    for num in nums:
+        print(fibonacci(num))
+
+
 def main() -> None:
     """メイン関数."""
     n = int(sys.argv[1])
-    print(fibonacci(n))
+    # 論理コア数を取得
+    thread_num = os.cpu_count()
+
+    # 論理コアが存在しない場合(mypy でエラーとなる)
+    if thread_num is None:
+        thread_num = 3
+
+    nums = [n] * thread_num
+    print(get_sequential(nums))
 
 
 if __name__ == "__main__":
