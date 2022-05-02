@@ -2,6 +2,7 @@
 import os
 import sys
 import time
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import Callable, ParamSpec, TypeVar
 
 P = ParamSpec("P")  # パラメータ仕様変数. パラメータを表す型ヒント
@@ -56,6 +57,21 @@ def get_sequential(nums: list[int]) -> None:
         print(fibonacci(num))
 
 
+@elapsed_time
+def get_multi_process(nums: list[int]) -> None:
+    """マルチプロセスでフィボナッチ数列を計算する.
+
+    Args:
+        nums (list[int]): フィボナッチ数列を計算する値のリスト
+    """
+    with ProcessPoolExecutor() as e:
+        futures = [e.submit(fibonacci, num) for num in nums]
+
+        # 処理が終了次第、結果を表示
+        for future in as_completed(futures):
+            print(future.result())
+
+
 def main() -> None:
     """メイン関数."""
     n = int(sys.argv[1])
@@ -67,7 +83,8 @@ def main() -> None:
         thread_num = 3
 
     nums = [n] * thread_num
-    print(get_sequential(nums))
+    # print(get_sequential(nums))
+    get_multi_process(nums)
 
 
 if __name__ == "__main__":
