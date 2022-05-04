@@ -10,5 +10,33 @@
 
 * Windows 10 pro Version 21H2
 * Docker Desktop for Windows
-* Visual Studio Code
-  * 拡張機能: Remote - Container
+* Python Docker Official Image
+  * `python:3.10.4`
+* `Visual Studio Code`
+  * 拡張機能: `Remote - Container`
+
+`Visual Studio Code` から Python のコンテナにアクセスして開発を行う
+
+以下の `Visual Studio Code` の拡張機能がコンテナ内にインストールされる
+
+* `Python`
+* `Pylance`
+* `markdownlint`
+* `Git history`
+* `autoDocstring - Python Docstring Generator`
+* `indent-rainbow`
+
+## Python の linter / formatter
+
+以下の linter / formatter を使用
+
+* linter
+  * `flake8`
+  * `bandit`
+  * `pydocstyle`
+  * `mypy`
+* formatter
+  * `black`
+  * `isort`
+
+Ctrl + S でファイルを保存すると formatter が実行されるよう、コンテナ内の `Visual Studio Code` の設定を変更している
