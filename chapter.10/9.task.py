@@ -61,6 +61,16 @@ async def use_task() -> None:
     print(await task3)
 
 
+@elapsed_time
+async def not_task() -> None:
+    """タスクを使用せずにコルーチンのまま実行."""
+    # 6秒かかる
+    print(await coro(1))
+    print(await coro(2))
+    print(await coro(3))
+
+
 if __name__ == "__main__":
     asyncio.run(task_demo())
     asyncio.run(use_task())
+    asyncio.run(not_task())
