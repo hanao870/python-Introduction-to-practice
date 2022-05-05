@@ -24,3 +24,13 @@ class BuildUrlTest(unittest.TestCase):
 
         # アサーションメソッドの利用
         self.assertEqual(expected, actual)
+
+    def test_build_url_fail(self) -> None:
+        """`build_url()` の失敗テスト."""
+        from booksearch.api import build_url
+
+        expected = "https://www.googleapis.com/books/v1/volumes"
+        actual = build_url({})
+
+        # アサーションメソッドの利用
+        self.assertEqual(expected, actual, msg="このテストは失敗します")
