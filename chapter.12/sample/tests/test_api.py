@@ -14,3 +14,13 @@ class BuildUrlTest(unittest.TestCase):
 
         # アサーションメソッドの利用
         self.assertEqual(expected, actual)
+
+    def test_build_url_empty_param(self) -> None:
+        """`build_url()` のテスト. 空の書籍名を設定."""
+        from booksearch.api import build_url
+
+        expected = "https://www.googleapis.com/books/v1/volumes?"
+        actual = build_url({})
+
+        # アサーションメソッドの利用
+        self.assertEqual(expected, actual)
