@@ -25,6 +25,9 @@ class BuildUrlTest(unittest.TestCase):
         # アサーションメソッドの利用
         self.assertEqual(expected, actual)
 
+    # テスト失敗時の結果を抑制する
+    # 一時的な対応時(リファクタリング等)に使用.
+    @unittest.expectedFailure
     def test_build_url_fail(self) -> None:
         """`build_url()` の失敗テスト."""
         from booksearch.api import build_url
