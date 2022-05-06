@@ -1,4 +1,5 @@
 """モジュール api の単体テスト."""
+import sys
 import unittest
 
 
@@ -42,4 +43,10 @@ class BuildUrlTest(unittest.TestCase):
     @unittest.skip("this is a skip test")
     def test_nothing_skip(self) -> None:
         """テストスキップの動作確認."""
+        pass
+
+    # Python バージョンが 3.6 より大きければスキップ
+    @unittest.skipIf(sys.version_info > (3, 6), "this is a skipIf test")
+    def test_nothing_skipIf(self) -> None:
+        """条件付きテストスキップの動作確認."""
         pass
