@@ -37,3 +37,9 @@ class BuildUrlTest(unittest.TestCase):
 
         # アサーションメソッドの利用
         self.assertEqual(expected, actual, msg="このテストは失敗します")
+
+    # 引数にスキップする理由を渡す
+    @unittest.skip("this is a skip test")
+    def test_nothing_skip(self) -> None:
+        """テストスキップの動作確認."""
+        pass
