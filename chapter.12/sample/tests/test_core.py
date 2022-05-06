@@ -3,6 +3,7 @@ import pathlib
 import unittest
 from tempfile import TemporaryDirectory
 from unittest.mock import Mock, patch
+from urllib.error import URLError
 
 THUMBNAIL_URL = (
     "http://books.google.com/books/content"
@@ -66,3 +67,23 @@ class SaveThumbnailsTest(unittest.TestCase):
 
         # 保存されたテストデータを確認
         self.assertEqual(mock_get_data.return_value, filename.read_bytes())
+
+
+class GetBooksTest(unittest.TestCase):
+    """モジュール `core` の単体テストクラス."""
+
+    def test_get_books_no_connection(self) -> None:
+        """`get_books` の単体テスト.
+
+        通信失敗の例外発生をテストする
+        """
+        from booksearch.core import get_books
+
+        # 一時的にネットワークアクセスを遮断
+        with patch("socket.socket.connect") as mock:
+            # connect が呼び出された際に不正な値を返す
+            mock.return_value = None
+
+            with self.assertRaisesRegex(URLError, "urlopen error"):
+                # 例外が発生する処理を with ブロック内で実行する
+                get_books(q="python")
