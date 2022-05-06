@@ -87,3 +87,26 @@ class GetBooksTest(unittest.TestCase):
             with self.assertRaisesRegex(URLError, "urlopen error"):
                 # 例外が発生する処理を with ブロック内で実行する
                 get_books(q="python")
+
+
+class BuildUrlMultiTest(unittest.TestCase):
+    """モジュール `core` の単体テストクラス."""
+
+    def test_build_url_multi(self) -> None:
+        """`build_url` の単体テスト."""
+        from booksearch.api import build_url
+
+        base = "https://www.googleapis.com/books/v1/volumes?"
+        expected_url = f"{base}q=python"
+
+        # 2, 3 番目のテストは失敗する
+        params = (
+            (expected_url, {"q": "python"}),
+            (expected_url, {"q": "python", "maxResult": 1}),
+            (expected_url, {"q": "python", "langRestrict": "en"}),
+        )
+
+        for expected, param in params:
+            with self.subTest(param):
+                actual = build_url(param)
+                self.assertEqual(expected, actual)
