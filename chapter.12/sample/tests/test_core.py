@@ -1,8 +1,10 @@
 """モジュール core の単体テスト."""
+import json
 import pathlib
 import unittest
+from io import StringIO
 from tempfile import TemporaryDirectory
-from unittest.mock import Mock, patch
+from unittest.mock import MagicMock, Mock, patch
 from urllib.error import URLError
 
 THUMBNAIL_URL = (
@@ -110,3 +112,25 @@ class BuildUrlMultiTest(unittest.TestCase):
             with self.subTest(param):
                 actual = build_url(param)
                 self.assertEqual(expected, actual)
+
+
+class GetJsonTest(unittest.TestCase):
+    """モジュール `core` の単体テストクラス."""
+
+    def test_get_json(self) -> None:
+        """`get_json` の単体テスト."""
+        from booksearch.api import get_json
+
+        with patch("booksearch.api.request.urlopen") as mock_urlopen:
+            # コンテキストマネージャーのモックを用意
+            # APIレスポンスになるJSONデータを用意する
+            expected_response = {"id": "test"}
+            fp = StringIO(json.dumps(expected_response))
+
+            # MagicMockクラスを使うと__exit__の追加は不要
+            mock = MagicMock()
+            mock.__enter__.return_value = fp
+            # urlopen()の戻り値がコンテキストマネージャー
+            mock_urlopen.return_value = mock
+            actual = get_json({"q": "python"})
+            self.assertEqual(expected_response, actual)
