@@ -4,6 +4,10 @@ import unittest
 
 
 class TestFunc(unittest.TestCase):
-    def test_func(self):
-        from hello import func
+    """`import` の動作確認クラス."""
+
+    def test_func(self) -> None:
+        """`import` テスト."""
+        from .hello import func
+
         self.assertIsNone(func("こんちわ"))
