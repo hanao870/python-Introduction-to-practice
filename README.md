@@ -31,12 +31,12 @@
 以下の linter / formatter を使用
 
 * linter
-  * `flake8`
-  * `bandit`
-  * `pydocstyle`
-  * `mypy`
+  * [flake8](https://github.com/PyCQA/flake8)
+  * [bandit](https://github.com/PyCQA/bandit)
+  * [pydocstyle](https://github.com/PyCQA/pydocstyle)
+  * [mypy](https://github.com/python/mypy)
 * formatter
-  * `black`
-  * `isort`
+  * [black](https://github.com/psf/black)
+  * [isort](https://github.com/PyCQA/isort)
 
 Ctrl + S でファイルを保存すると formatter が実行されるよう、コンテナ内の `Visual Studio Code` の設定を変更している
